@@ -33,7 +33,7 @@
       <b>🐧 İşletim Sistemi:</b> Linux Lover
     </td>
     <td valign="center">
-      <img align="right" src="https://media.giphy.com/media/hS4G3V3g0aa3M6gXER/giphy.gif" width="120" />
+      <img align="right" src="https://media.giphy.com/media/vfO5tCg8S1tT6o1R3N/giphy.gif" width="120" />
     </td>
   </tr>
 </table>
@@ -46,10 +46,8 @@
 
   <img src="https://skillicons.dev/icons?i=python,cs,java,c,cpp&perline=5" />
   <br><br>
-  
   <img src="https://skillicons.dev/icons?i=html,css,js&perline=5" />
   <br><br>
-
   <img src="https://skillicons.dev/icons?i=dotnet,mysql,mongodb,linux&perline=5" />
 
 </div>
@@ -60,15 +58,11 @@
 
 <div align="center">
 
+[![Switly's GitHub stats](https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B)](https://github.com/switlydev)
+
 <br>
 
-<a href="https://github.com/switlydev">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B" />
-</a>
-
-<a href="https://github.com/switlydev">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&text_color=01579B" />
-</a>
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&text_color=01579B)](https://github.com/switlydev)
 
 </div>
 
