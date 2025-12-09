@@ -33,12 +33,12 @@
       <b>🐧 OS:</b> Linux Lover
     </td>
     <td valign="center">
-      <img align="right" src="https://media.giphy.com/media/vfO5tCg8S1tT6o1R3N/giphy.gif" width="120" />
+      <img align="right" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cThvbjl6Z2hyZm9mZ3MxenVhcG54ajQwOHA4aTUzZ3FvcWJ0bXdvcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l41YamEiIYltJtLUI/giphy.gif" width="120" />
     </td>
   </tr>
 </table>
 
----
+
 
 ### <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> My Tech Stack
 
@@ -52,7 +52,7 @@
 
 </div>
 
----
+
 
 ### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub Stats
 
