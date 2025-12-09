@@ -54,7 +54,6 @@
 
 ---
 
-### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub Stats
 
 <div align="center">
 
