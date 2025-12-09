@@ -62,21 +62,7 @@
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=switlydev&theme=transparent&background=E0F7FA&border=E0F7FA&stroke=007ACC&ring=007ACC&fire=007ACC&currStreakLabel=01579B&currStreakNum=000000&sideNums=000000&sideLabels=01579B&dates=01579B&hide_border=true&locale=en" alt="Switlydev Streak" />
 </a>
 
-<br><br>
 
-<a href="https://github.com/switlydev">
-  <img src="https://github-profile-trophy.vercel.app/?username=switlydev&theme=flat&no-frame=true&margin-w=15&no-bg=true" />
-</a>
-
-<br><br>
-
-<a href="https://github.com/switlydev">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&hide_border=true&bg_color=E0F7FA&title_color=007ACC&text_color=01579B" />
-</a>
-
-</div>
-
-<br>
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=007ACC&height=100&section=footer"/>
