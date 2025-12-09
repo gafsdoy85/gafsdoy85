@@ -42,7 +42,6 @@
 
 ### <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> Teknoloji Yığınım
 
-Burada yeteneklerimi, "ikon" tarzında ve Frutiger Aero'nun renkli dünyasına uygun şekilde listeledim.
 
 <div align="center">
 
@@ -60,18 +59,17 @@ Burada yeteneklerimi, "ikon" tarzında ve Frutiger Aero'nun renkli dünyasına u
 
 ### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub İstatistiklerim
 
-Frutiger Aero temasına uygun olarak **Mavi/Okyanus** temalı istatistik kartları.
 
 <div align="center">
 
 <br>
 
 <a href="https://github.com/Switly">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Switly&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B" />
 </a>
 
 <a href="https://github.com/Switly">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Switly&layout=compact&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&text_color=01579B" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&text_color=01579B" />
 </a>
 
 </div>
