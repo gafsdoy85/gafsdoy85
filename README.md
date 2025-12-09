@@ -1,36 +1,36 @@
-[<div align="center">
+<div align="center">
 
   <img src="https://64.media.tumblr.com/b284141d08e5bc01e389d0473952f4be/tumblr_inline_p7rv23x6Oa1r4mkii_500.gif" width="100%" style="border-radius: 15px; box-shadow: 0px 5px 15px rgba(0, 150, 255, 0.3);">
 
   <br><br>
 
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Verdana&weight=600&size=30&duration=3000&pause=1000&color=007ACC&center=true&vCenter=true&width=435&lines=Selam+Ben+Switly!+%F0%9F%91%8B;Kodlamac%C4%B1+%F0%9F%92%BB;Frutiger+Aero+Lover+%F0%9F%8C%8A" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Verdana&weight=600&size=30&duration=3000&pause=1000&color=007ACC&center=true&vCenter=true&width=435&lines=Hi,+I'm+Switly!+%F0%9F%91%8B;Coder+%26+Developer+%F0%9F%92%BB;Frutiger+Aero+Lover+%F0%9F%8C%8A" alt="Typing SVG" />
   </a>
 
   <br>
 
   <a href="https://switlydev.github.io/">
-    <img src="https://img.shields.io/badge/Portfolyo_Sitem-Ziyaret_Et-2EA44F?style=for-the-badge&logo=github&logoColor=white" height="30"/>
+    <img src="https://img.shields.io/badge/My_Portfolio-Visit_Me-2EA44F?style=for-the-badge&logo=github&logoColor=white" height="30"/>
   </a>
 
 </div>
 
 <hr style="border: 2px solid #007ACC; border-radius: 5px;">
 
-### <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="30"> Hakkımda
+### <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="30"> About Me
 
-> *"Kod yazmayı seven bir gencim. Boş zamanlarımı bu şekilde değerlendiriyorum."* 🌐
+> *"I'm a young developer who loves coding. I spend my free time building projects."* 🌐
 
 <br>
 
 <table>
   <tr>
     <td valign="center">
-      <b>👤 İsim:</b> Switly<br>
-      <b>🎂 Yaş:</b> 17<br>
-      <b>📍 Konum:</b> Türkiye<br>
-      <b>🐧 İşletim Sistemi:</b> Linux Lover
+      <b>👤 Name:</b> Switly<br>
+      <b>🎂 Age:</b> 17<br>
+      <b>📍 Location:</b> Turkey<br>
+      <b>🐧 OS:</b> Linux Lover
     </td>
     <td valign="center">
       <img align="right" src="https://media.giphy.com/media/vfO5tCg8S1tT6o1R3N/giphy.gif" width="120" />
@@ -40,7 +40,7 @@
 
 ---
 
-### <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> Teknoloji Yığınım
+### <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> My Tech Stack
 
 <div align="center">
 
@@ -54,9 +54,30 @@
 
 ---
 
+### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub Stats
 
+<div align="center">
+
+<a href="https://github.com/switlydev">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=switlydev&theme=transparent&background=E0F7FA&border=E0F7FA&stroke=007ACC&ring=007ACC&fire=007ACC&currStreakLabel=01579B&currStreakNum=000000&sideNums=000000&sideLabels=01579B&dates=01579B&hide_border=true&locale=en" alt="Switlydev Streak" />
+</a>
+
+<br><br>
+
+<a href="https://github.com/switlydev">
+  <img src="https://github-profile-trophy.vercel.app/?username=switlydev&theme=flat&no-frame=true&margin-w=15&no-bg=true" />
+</a>
+
+<br><br>
+
+<a href="https://github.com/switlydev">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&hide_border=true&bg_color=E0F7FA&title_color=007ACC&text_color=01579B" />
+</a>
+
+</div>
+
+<br>
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=007ACC&height=100&section=footer"/>
 </div>
-](https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B)
