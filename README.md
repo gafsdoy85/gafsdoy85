@@ -54,7 +54,7 @@
 
 ---
 
-### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub İstatistiklerim
+### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub Stats
 
 <div align="center">
 <a href="https://github.com/switlydev">
