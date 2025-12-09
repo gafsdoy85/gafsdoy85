@@ -54,19 +54,7 @@
 
 ---
 
-### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub İstatistiklerim
 
-<div align="center">
-
-[![Switly's GitHub stats](https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B)](https://github.com/switlydev)
-
-<br>
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=switlydev&layout=compact&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&text_color=01579B)](https://github.com/switlydev)
-
-</div>
-
-<br>
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=007ACC&height=100&section=footer"/>
