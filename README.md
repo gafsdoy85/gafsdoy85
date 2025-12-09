@@ -56,7 +56,7 @@
 
 
 <div align="center">
-
+### <img src="https://media.giphy.com/media/iTts6BfB6H9O8/giphy.gif" width="30"> GitHub İstatistiklerim
 <a href="https://github.com/switlydev">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=switlydev&theme=transparent&background=E0F7FA&border=E0F7FA&stroke=007ACC&ring=007ACC&fire=007ACC&currStreakLabel=01579B&currStreakNum=000000&sideNums=000000&sideLabels=01579B&dates=01579B&hide_border=true&locale=en" alt="Switlydev Streak" />
 </a>
