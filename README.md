@@ -1,4 +1,4 @@
-<div align="center">
+[<div align="center">
 
   <img src="https://64.media.tumblr.com/b284141d08e5bc01e389d0473952f4be/tumblr_inline_p7rv23x6Oa1r4mkii_500.gif" width="100%" style="border-radius: 15px; box-shadow: 0px 5px 15px rgba(0, 150, 255, 0.3);">
 
@@ -71,3 +71,4 @@
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=007ACC&height=100&section=footer"/>
 </div>
+](https://github-readme-stats.vercel.app/api?username=switlydev&show_icons=true&theme=buefy&hide_border=true&bg_color=E0F7FA&title_color=0277BD&icon_color=0288D1&text_color=01579B)
