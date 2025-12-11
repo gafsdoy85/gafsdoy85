@@ -2,7 +2,7 @@ name: Update Dynamic Image
 
 on:
   schedule:
-    - cron: "*/2 * * * *"   # 2 dakikada bir çalışır
+    - cron: "*/2 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -38,12 +38,16 @@ jobs:
               headless: "new",
               args: ["--no-sandbox"]
             });
+
             const page = await browser.newPage();
 
             await page.goto(`file://${process.cwd()}/test.html`);
-            await page.waitForTimeout(500);
+
+            // waitForTimeout yerine setTimeout ile bekletiyoruz
+            await new Promise(r => setTimeout(r, 500));
 
             await page.screenshot({ path: "dynamic.png" });
+
             await browser.close();
           })();
           EOF
