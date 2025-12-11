@@ -1,1 +1,1 @@
-<img src="dynamic.png?timestamp=1" width="600">
+<img src="dynamic.png" width="600">
