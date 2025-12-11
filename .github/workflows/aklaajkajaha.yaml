@@ -2,56 +2,59 @@ name: Update Dynamic Image
 
 on:
   schedule:
-    - cron: "*/2 * * * *"
+    - cron: "*/2 * * * *"    # her 2 dakikada bir
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  render:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: Install Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install canvas
+      - name: Install Puppeteer
+        run: npm install puppeteer
 
-      - name: Generate PNG with current time
+      - name: Insert current time into test.html
+        run: |
+          NOW=$(date +"%Y-%m-%d %H:%M:%S")
+          sed -i "s|__TIME__|$NOW|g" test.html
+
+      - name: Render screenshot
         run: |
           node <<'EOF'
-          const { createCanvas } = require('canvas');
+          const puppeteer = require('puppeteer');
 
-          const canvas = createCanvas(600, 200);
-          const ctx = canvas.getContext('2d');
+          (async () => {
+            const browser = await puppeteer.launch({
+              args: ['--no-sandbox']
+            });
 
-          // Arkaplan
-          ctx.fillStyle = '#111';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const page = await browser.newPage();
+            await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
 
-          // Yazı
-          ctx.fillStyle = '#00ffcc';
-          ctx.font = '48px Sans';
+            await page.waitForTimeout?.(1000) || new Promise(r => setTimeout(r, 1000));
 
-          const time = new Date().toLocaleTimeString('tr-TR', { hour12: false });
-          ctx.fillText(`Saat: ${time}`, 50, 120);
-
-          // PNG kaydet
-          const fs = require('fs');
-          fs.writeFileSync('dynamic.png', canvas.toBuffer());
+            await page.screenshot({ path: 'dynamic.png' });
+            await browser.close();
+          })();
           EOF
 
-      - name: Commit & Push
+      - name: Update README image timestamp (cache breaker)
+        run: |
+          TS=$(date +%s)
+          sed -i "s|dynamic.png?ts=.*\"|dynamic.png?ts=$TS\"|g" README.md
+
+      - name: Commit and push
         run: |
           git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add dynamic.png
-          git commit -m "Update dynamic time image"
-          git push
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Auto update dynamic image" || echo "No changes"
+          git push || echo "Nothing to push"
