@@ -1,0 +1,38 @@
+name: Dynamic Render
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+env:
+  USERNAME: "switlydev"
+  THEME: "radical"
+  MODE: "general"
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Take screenshot
+        run: |
+          URL="https://gafsdoy85.github.io/test/index.html?username=${USERNAME}&theme=${THEME}&mode=${MODE}"
+          google-chrome --headless --disable-gpu \
+            --window-size=1920,1080 \
+            --screenshot=dynamic.png \
+            "$URL"
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add dynamic.png
+          git commit -m "Update dynamic image" || echo "No changes"
+          git push
