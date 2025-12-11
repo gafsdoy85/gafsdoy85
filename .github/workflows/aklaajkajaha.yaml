@@ -21,41 +21,37 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install puppeteer
-        run: npm install puppeteer
+      - name: Install dependencies
+        run: npm install canvas
 
-      - name: Update time in HTML
-        run: |
-          echo "<html><body style='font-size:40px;'>Saat: $(date +"%H:%M:%S")</body></html>" > test.html
-
-      - name: Render screenshot
+      - name: Generate PNG with current time
         run: |
           node <<'EOF'
-          const puppeteer = require('puppeteer');
+          const { createCanvas } = require('canvas');
 
-          (async () => {
-            const browser = await puppeteer.launch({
-              headless: "new",
-              args: ["--no-sandbox"]
-            });
+          const canvas = createCanvas(600, 200);
+          const ctx = canvas.getContext('2d');
 
-            const page = await browser.newPage();
+          // Arkaplan
+          ctx.fillStyle = '#111';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            await page.goto(`file://${process.cwd()}/test.html`);
+          // Yazı
+          ctx.fillStyle = '#00ffcc';
+          ctx.font = '48px Sans';
 
-            // waitForTimeout yerine setTimeout ile bekletiyoruz
-            await new Promise(r => setTimeout(r, 500));
+          const time = new Date().toLocaleTimeString('tr-TR', { hour12: false });
+          ctx.fillText(`Saat: ${time}`, 50, 120);
 
-            await page.screenshot({ path: "dynamic.png" });
-
-            await browser.close();
-          })();
+          // PNG kaydet
+          const fs = require('fs');
+          fs.writeFileSync('dynamic.png', canvas.toBuffer());
           EOF
 
       - name: Commit & Push
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add dynamic.png test.html
-          git commit -m "Update dynamic image"
+          git add dynamic.png
+          git commit -m "Update dynamic time image"
           git push
