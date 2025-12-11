@@ -2,7 +2,7 @@ name: Update Dynamic Image
 
 on:
   schedule:
-    - cron: "*/2 * * * *"    # her 2 dakikada bir
+    - cron: "*/2 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -21,40 +21,50 @@ jobs:
       - name: Install Puppeteer
         run: npm install puppeteer
 
-      - name: Insert current time into test.html
-        run: |
-          NOW=$(date +"%Y-%m-%d %H:%M:%S")
-          sed -i "s|__TIME__|$NOW|g" test.html
-
-      - name: Render screenshot
-        run: |
-          node <<'EOF'
-          const puppeteer = require('puppeteer');
-
-          (async () => {
-            const browser = await puppeteer.launch({
-              args: ['--no-sandbox']
-            });
-
-            const page = await browser.newPage();
-            await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
-
-            await page.waitForTimeout?.(1000) || new Promise(r => setTimeout(r, 1000));
-
-            await page.screenshot({ path: 'dynamic.png' });
-            await browser.close();
-          })();
-          EOF
-
-      - name: Update README image timestamp (cache breaker)
+      - name: Render screenshot in /tmp
+        id: render
         run: |
           TS=$(date +%s)
-          sed -i "s|dynamic.png?ts=.*\"|dynamic.png?ts=$TS\"|g" README.md
+          FILENAME="dynamic_${TS}.png"
+          TMP_PATH="/tmp/$FILENAME"
+          echo "file=$FILENAME" >> $GITHUB_OUTPUT
+          echo "tmp=$TMP_PATH" >> $GITHUB_OUTPUT
 
-      - name: Commit and push
+          node <<'EOF'
+          const puppeteer = require('puppeteer');
+          const fs = require('fs');
+
+          (async () => {
+            const out = process.env.TMP_PATH;
+
+            const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+            const page = await browser.newPage();
+
+            await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
+
+            await new Promise(r => setTimeout(r, 1000));
+
+            await page.screenshot({ path: out });
+
+            await browser.close();
+          })();
+EOF
+        env:
+          TMP_PATH: /tmp/dynamic_$(date +%s).png
+
+      - name: Copy image from /tmp into repo
+        run: |
+          cp "${{ steps.render.outputs.tmp }}" "./${{ steps.render.outputs.file }}"
+
+      - name: Update README with new filename
+        run: |
+          NEWFILE="${{ steps.render.outputs.file }}"
+          sed -i "s|<img .*|<img src=\"$NEWFILE\" width=\"400\">|g" README.md
+
+      - name: Commit & Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
-          git commit -m "Auto update dynamic image" || echo "No changes"
+          git commit -m "Update dynamic image" || echo "No changes"
           git push || echo "Nothing to push"
