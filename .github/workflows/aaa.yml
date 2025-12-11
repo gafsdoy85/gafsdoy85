@@ -21,48 +21,48 @@ jobs:
       - name: Install Puppeteer
         run: npm install puppeteer
 
-      - name: Render screenshot
+      - name: Create renderer script
+        run: |
+          cat > render.js << 'EOF'
+          const puppeteer = require('puppeteer');
+
+          (async () => {
+            const out = process.argv[2];
+            const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+            const page = await browser.newPage();
+
+            await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
+            await page.waitForTimeout(1000);
+
+            await page.screenshot({ path: out });
+            await browser.close();
+          })();
+          EOF
+
+      - name: Render screenshot into /tmp
         id: render
         run: |
           TS=$(date +%s)
           FILENAME="dynamic_${TS}.png"
-          TMP_PATH="/tmp/${FILENAME}"
+          TMP_PATH="/tmp/$FILENAME"
 
-          echo "filename=$FILENAME" >> $GITHUB_OUTPUT
-          echo "tmppath=$TMP_PATH" >> $GITHUB_OUTPUT
+          node render.js "$TMP_PATH"
 
-          node <<EOF
-          const puppeteer = require('puppeteer');
-          (async () => {
-            const out = "${TMP_PATH}";
-            const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-            const page = await browser.newPage();
+          echo "file=$FILENAME" >> $GITHUB_OUTPUT
+          echo "tmp=$TMP_PATH" >> $GITHUB_OUTPUT
 
-            await page.goto('file://' + process.cwd() + '/test.html', {
-              waitUntil: 'networkidle0'
-            });
-
-            await page.waitForTimeout(1000);
-
-            await page.screenshot({ path: out });
-
-            await browser.close();
-          })();
-EOF
-
-      - name: Move PNG from /tmp into repo
-        run: |
-          cp "${{ steps.render.outputs.tmppath }}" "${{ steps.render.outputs.filename }}"
+      - name: Copy image into repo
+        run: cp "${{ steps.render.outputs.tmp }}" "./${{ steps.render.outputs.file }}"
 
       - name: Update README
         run: |
-          IMG="${{ steps.render.outputs.filename }}"
-          sed -i "s|<img .*|<img src=\"$IMG\" width=\"400\">|g" README.md
+          NEWFILE="${{ steps.render.outputs.file }}"
+          sed -i "s|<img .*|<img src=\"$NEWFILE\" width=\"400\">|g" README.md
 
-      - name: Commit & Push
+      - name: Commit & Push changes
         run: |
           git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.email "github-actions@github.com"
           git add .
-          git commit -m "Auto update dynamic image" || echo "No changes"
+          git commit -m "Update dynamic image" || echo "No changes"
           git push || echo "Nothing to push"
