@@ -28,38 +28,39 @@ jobs:
 
           (async () => {
             const out = process.argv[2];
+
             const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
             const page = await browser.newPage();
 
             await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
-            await page.waitForTimeout(1000);
+
+            await new Promise(r => setTimeout(r, 1000));
 
             await page.screenshot({ path: out });
             await browser.close();
           })();
           EOF
 
-      - name: Render screenshot into /tmp
-        id: render
+      - name: Generate dynamic filename
+        id: gen
         run: |
           TS=$(date +%s)
           FILENAME="dynamic_${TS}.png"
-          TMP_PATH="/tmp/$FILENAME"
+          echo "filename=$FILENAME" >> $GITHUB_OUTPUT
 
-          node render.js "$TMP_PATH"
-
-          echo "file=$FILENAME" >> $GITHUB_OUTPUT
-          echo "tmp=$TMP_PATH" >> $GITHUB_OUTPUT
+      - name: Render screenshot to /tmp
+        run: |
+          node render.js "/tmp/${{ steps.gen.outputs.filename }}"
 
       - name: Copy image into repo
-        run: cp "${{ steps.render.outputs.tmp }}" "./${{ steps.render.outputs.file }}"
+        run: |
+          cp "/tmp/${{ steps.gen.outputs.filename }}" "./${{ steps.gen.outputs.filename }}"
 
       - name: Update README
         run: |
-          NEWFILE="${{ steps.render.outputs.file }}"
-          sed -i "s|<img .*|<img src=\"$NEWFILE\" width=\"400\">|g" README.md
+          sed -i "s|<img .*|<img src=\"${{ steps.gen.outputs.filename }}\" width=\"400\">|g" README.md
 
-      - name: Commit & Push changes
+      - name: Commit & Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
