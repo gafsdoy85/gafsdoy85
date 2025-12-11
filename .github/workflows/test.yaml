@@ -1,38 +1,31 @@
-name: Dynamic Render
+name: Update Dynamic Image
+
+permissions:
+  contents: write   # PUSH İZİNİ BURADA VERİYORUZ
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
-  workflow_dispatch:
-
-env:
-  USERNAME: "switlydev"
-  THEME: "radical"
-  MODE: "general"
+    - cron: "*/5 * * * *"   # 5 dakikada bir çalışır
+  workflow_dispatch:        # Manuel tetikleme
 
 jobs:
-  render:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@latest
+    - name: Generate dynamic image
+      run: |
+        curl -o dynamic.png "https://gafsdoy85.github.io/test/index.html?username=switlydev&theme=radical&mode=general"
 
-      - name: Take screenshot
-        run: |
-          URL="https://gafsdoy85.github.io/test/index.html?username=${USERNAME}&theme=${THEME}&mode=${MODE}"
-          google-chrome --headless --disable-gpu \
-            --window-size=1920,1080 \
-            --screenshot=dynamic.png \
-            "$URL"
-
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add dynamic.png
-          git commit -m "Update dynamic image" || echo "No changes"
-          git push
+    - name: Commit and push changes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add dynamic.png
+        git commit -m "Update dynamic image" || echo "No changes"
+        git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/gafsdoy85/gafsdoy85.git"
