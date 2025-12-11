@@ -1,1 +1,1 @@
-<img src="https://gafsdoy85.github.io/test/?username=switlydev&theme=radical&card=stats&embed=true">
+<img src="dynamic.png?timestamp=1" width="600">
