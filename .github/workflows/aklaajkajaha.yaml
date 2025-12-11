@@ -21,50 +21,48 @@ jobs:
       - name: Install Puppeteer
         run: npm install puppeteer
 
-      - name: Render screenshot in /tmp
+      - name: Render screenshot
         id: render
         run: |
           TS=$(date +%s)
           FILENAME="dynamic_${TS}.png"
-          TMP_PATH="/tmp/$FILENAME"
-          echo "file=$FILENAME" >> $GITHUB_OUTPUT
-          echo "tmp=$TMP_PATH" >> $GITHUB_OUTPUT
+          TMP_PATH="/tmp/${FILENAME}"
 
-          node <<'EOF'
+          echo "filename=$FILENAME" >> $GITHUB_OUTPUT
+          echo "tmppath=$TMP_PATH" >> $GITHUB_OUTPUT
+
+          node <<EOF
           const puppeteer = require('puppeteer');
-          const fs = require('fs');
-
           (async () => {
-            const out = process.env.TMP_PATH;
-
+            const out = "${TMP_PATH}";
             const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
             const page = await browser.newPage();
 
-            await page.goto('file://' + process.cwd() + '/test.html', { waitUntil: 'networkidle0' });
+            await page.goto('file://' + process.cwd() + '/test.html', {
+              waitUntil: 'networkidle0'
+            });
 
-            await new Promise(r => setTimeout(r, 1000));
+            await page.waitForTimeout(1000);
 
             await page.screenshot({ path: out });
 
             await browser.close();
           })();
 EOF
-        env:
-          TMP_PATH: /tmp/dynamic_$(date +%s).png
 
-      - name: Copy image from /tmp into repo
+      - name: Move PNG from /tmp into repo
         run: |
-          cp "${{ steps.render.outputs.tmp }}" "./${{ steps.render.outputs.file }}"
+          cp "${{ steps.render.outputs.tmppath }}" "${{ steps.render.outputs.filename }}"
 
-      - name: Update README with new filename
+      - name: Update README
         run: |
-          NEWFILE="${{ steps.render.outputs.file }}"
-          sed -i "s|<img .*|<img src=\"$NEWFILE\" width=\"400\">|g" README.md
+          IMG="${{ steps.render.outputs.filename }}"
+          sed -i "s|<img .*|<img src=\"$IMG\" width=\"400\">|g" README.md
 
       - name: Commit & Push
         run: |
           git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.email "actions@github.com"
           git add .
-          git commit -m "Update dynamic image" || echo "No changes"
+          git commit -m "Auto update dynamic image" || echo "No changes"
           git push || echo "Nothing to push"
