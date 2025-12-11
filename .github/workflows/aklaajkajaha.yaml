@@ -30,7 +30,7 @@ jobs:
         const puppeteer = require('puppeteer');
 
         (async () => {
-          const url = "https://gafsdoy85.github.io/test/index.html?username=switlydev&theme=radical&mode=general";
+          const url = "https://gafsdoy85.github.io/test/";
 
           const browser = await puppeteer.launch({
             headless: "new",
