@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "*/2 * * * *"   # ⬅ 2 dakikada bir çalışır
+    - cron: "*/2 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -40,11 +40,13 @@ jobs:
           const page = await browser.newPage();
           await page.setViewport({ width: 495, height: 195 });
 
-          await page.goto(url, { waitUntil: "networkidle2" });
-          await page.waitForTimeout(1000);
+          await page.goto(url, { waitUntil: "networkidle0" });
+
+          // yerine bu:
+          await new Promise(r => setTimeout(r, 1500));
 
           await page.screenshot({
-            path: "dynamic.png",
+            path: "dynamic.png"
           });
 
           await browser.close();
