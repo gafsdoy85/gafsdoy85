@@ -1,62 +1,57 @@
-name: Render Dynamic Canvas
+name: Update Dynamic Image
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"   # 2 dakikada bir çalışır
+  workflow_dispatch:
 
 permissions:
   contents: write
 
-on:
-  schedule:
-    - cron: "*/2 * * * *"
-  workflow_dispatch:
-
 jobs:
-  render:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: "18"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-    - name: Install Puppeteer
-      run: npm install puppeteer
+      - name: Install puppeteer
+        run: npm install puppeteer
 
-    - name: Render screenshot
-      run: |
-        node << 'EOF'
-        const puppeteer = require('puppeteer');
+      - name: Update time in HTML
+        run: |
+          echo "<html><body style='font-size:40px;'>Saat: $(date +"%H:%M:%S")</body></html>" > test.html
 
-        (async () => {
-          const url = "https://gafsdoy85.github.io/test/";
+      - name: Render screenshot
+        run: |
+          node <<'EOF'
+          const puppeteer = require('puppeteer');
 
-          const browser = await puppeteer.launch({
-            headless: "new",
-            args: ["--no-sandbox", "--disable-setuid-sandbox"]
-          });
+          (async () => {
+            const browser = await puppeteer.launch({
+              headless: "new",
+              args: ["--no-sandbox"]
+            });
+            const page = await browser.newPage();
 
-          const page = await browser.newPage();
-          await page.setViewport({ width: 495, height: 195 });
+            await page.goto(`file://${process.cwd()}/test.html`);
+            await page.waitForTimeout(500);
 
-          await page.goto(url, { waitUntil: "networkidle0" });
+            await page.screenshot({ path: "dynamic.png" });
+            await browser.close();
+          })();
+          EOF
 
-          // yerine bu:
-          await new Promise(r => setTimeout(r, 1500));
-
-          await page.screenshot({
-            path: "dynamic.png"
-          });
-
-          await browser.close();
-        })();
-        EOF
-
-    - name: Commit and push
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add dynamic.png
-        git commit -m "Render dynamic image" || echo "No changes"
-        git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+      - name: Commit & Push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add dynamic.png test.html
+          git commit -m "Update dynamic image"
+          git push
